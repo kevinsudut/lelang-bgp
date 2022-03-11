@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\Account\UserTableSeeder;
+use Database\Seeders\Product\ProductTableSeeder;
+use Database\Seeders\Wallet\WalletTableSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(UserTableSeeder::class);
+        $this->call(WalletTableSeeder::class);
+        $this->call(ProductTableSeeder::class);
     }
 }

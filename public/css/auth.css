@@ -1,0 +1,236 @@
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: rgba(52, 174, 226, 0.8);
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    background: linear-gradient(-30deg, #00d2ff, #3a7bd5);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+canvas {
+    position: fixed;
+    left: 0;
+}
+
+.logo-tokopedia {
+    width: 200px;
+    height: 140px;
+    background: url("../assets/a85c79fc.png") center no-repeat;
+    background-size: contain;
+    display: block;
+}
+
+footer {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-weight: bold;
+}
+
+.item-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container .item-center {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.auth-container .form-auth {
+    width: 425px;
+    height: auto;
+    background: white;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 15px 50px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .auth-container .item-center {
+        display: block;
+        margin-top: 80px;
+        height: auto;
+        position: relative;
+    }
+
+    .auth-container .item-center .slideshow {
+        margin: 0 auto;
+    }
+
+    .auth-container .form-auth {
+        margin: 0 auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    footer {
+        color: white;
+        font-weight: bold;
+        position: relative;
+        bottom: 0;
+        left: 0;
+        transform: none;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .auth-container .item-center .slideshow {
+        height: auto;
+        width: 350px;
+    }
+
+    .auth-container .item-center .slideshow #no-cheating-reminder {
+        height: auto;
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .auth-container .item-center .slideshow {
+        width: auto;
+    }
+
+    .auth-container .item-center .slideshow #no-cheating-reminder {
+        width: auto;
+    }
+
+    .auth-container .form-auth {
+        width: auto;
+    }
+}
+
+.auth-container .form-auth label::selection {
+    background: transparent;
+}
+
+.auth-container .form-auth .input-control {
+    width: 100%;
+    position: relative;
+    margin: 15px 0;
+}
+
+.auth-container .form-auth .input-control:first-of-type {
+    margin-top: 20px;
+}
+
+.auth-container .form-auth .input-control input {
+    width: 100%;
+    height: auto;
+    padding: 7px 10px 7px 35px;
+    box-shadow: none;
+    border: 1px solid #bbbbbb;
+    transition: border-color 0.1s ease-out;
+}
+
+.auth-container .form-auth .input-control input:focus {
+    outline: 0;
+    border-color: #00a9e2;
+    color: #00a9e2;
+}
+
+.auth-container
+    .form-auth
+    .input-control
+    input:focus::-webkit-input-placeholder {
+    color: #00a9e2;
+}
+
+.auth-container .form-auth .input-control input:focus:-moz-placeholder {
+    color: #00a9e2;
+}
+
+.auth-container .form-auth .input-control input:focus::-moz-placeholder {
+    color: #00a9e2;
+}
+
+.auth-container .form-auth .input-control input:focus:-ms-input-placeholder {
+    color: #00a9e2;
+}
+
+.auth-container .form-auth .input-control input:focus + .fa {
+    color: #00a9e2;
+}
+
+.auth-container .form-auth .input-control .fa {
+    top: 0;
+    left: 0;
+    color: #bbbbbb;
+    position: absolute;
+    padding: 9px 10px;
+    font-size: 15pt;
+    transition: color 0.1s ease-out;
+}
+
+.auth-container .form-auth button {
+    width: 100%;
+    background: #00a9e2;
+    padding: 7px;
+    border: 0;
+    color: white;
+    transition: background 0.1s ease-out;
+}
+
+.auth-container .form-auth button:hover,
+.auth-container .form-auth button:focus {
+    background: #0096c9;
+}
+
+.info {
+    position: absolute;
+    right: 0;
+    top: 15px;
+    width: 360px;
+    background: #fff;
+    border-left: 10px solid #07c8fa;
+    padding: 5px;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.info > div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.info .fa {
+    width: 20px;
+    display: inline-block;
+    text-align: center;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.info #time {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+#register-link a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #00a9e2;
+    font-weight: bold;
+}

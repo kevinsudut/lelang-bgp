@@ -29,7 +29,7 @@ abstract class Repository implements RepositoryInterface
      * Change true if the primary key is using guid
      * Change false if the primary key is auto increment
      */
-    protected $guid = true;
+    protected $guid = false;
 
     /**
      * @var $hasIdAttribute
