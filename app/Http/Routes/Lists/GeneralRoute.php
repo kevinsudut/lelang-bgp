@@ -10,6 +10,6 @@ class GeneralRoute implements RouteInterface
 {
     public static function list()
     {
-        Route::get('home', [HomeController::class, 'index']);
+        Route::get('/', [HomeController::class, 'index']);
     }
 }

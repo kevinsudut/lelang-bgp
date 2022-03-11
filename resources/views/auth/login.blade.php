@@ -26,7 +26,7 @@
             </div>
         @endif
 
-        <div class="text-center mt-2" id="register-link">
+        <div class="text-center mt-2" id="auth-link">
             <a href="{{ url('auth/register') }}">New here? Create an Account</a>
         </div>
     </form>

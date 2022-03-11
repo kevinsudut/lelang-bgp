@@ -1,0 +1,366 @@
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: rgba(52, 174, 226, 0.8);
+}
+
+#message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    display: none;
+}
+
+#message div #message-content {
+    font-size: x-large;
+}
+
+.form-group label {
+    font-weight: bold !important;
+}
+
+.legend {
+    float: left;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.blue {
+    color: #00a9e2;
+}
+
+.green {
+    background-color: #b8ffb8 !important;
+}
+
+.pink {
+    background-color: #ec93ae !important;
+}
+
+.aqua {
+    background-color: #b8dcff !important;
+}
+
+.yellow {
+    background-color: #f7f499 !important;
+}
+
+.white {
+    background-color: #ffffff !important;
+}
+
+.dropdown-toggle {
+    height: calc(1.5em + 0.75rem + 2px);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.dropdown-menu {
+    z-index: 9999;
+}
+
+.greating {
+    position: absolute;
+    right: 1rem;
+    top: 2rem;
+}
+
+.container {
+    max-width: 1440px;
+}
+
+.table > tfoot > tr > td,
+.table > tbody > tr > td,
+.table > thead > tr > th {
+    vertical-align: middle;
+}
+
+html,
+body {
+    background: #fff;
+}
+
+header {
+    background: white;
+    padding-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+header .container {
+    position: relative;
+}
+
+#logo {
+    height: 125px;
+    width: auto;
+    position: relative;
+    left: -20px;
+}
+
+#app-name {
+    font-family: "YACgEf17hXM 0", _fb_, auto;
+    font-size: 4rem;
+    margin-top: 25px;
+    position: relative;
+    left: -50px;
+    font-weight: 700;
+    font-style: normal;
+    color: #00a9e2;
+    text-decoration: none;
+}
+
+#salutation {
+    position: absolute;
+    top: 40px;
+    right: 15px;
+}
+
+#time-container {
+    position: absolute;
+    top: 85px;
+    right: 15px;
+    background-color: #dddddd;
+    padding: 0.75rem;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.cursor {
+    color: #777777;
+    padding-right: 3px;
+    position: relative;
+}
+
+.cursor::after {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 18px;
+    background: #777777;
+    -webkit-animation-name: blink;
+    -moz-animation-name: blink;
+    -ms-animation-name: blink;
+    -o-animation-name: blink;
+    animation-name: blink;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-timing-function: ease-in-out;
+    -ms-animation-timing-function: ease-in-out;
+    -o-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.flex {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.relative {
+    position: relative;
+}
+
+nav.my-navbar {
+    background: white;
+    border-bottom: 1px solid lightgray;
+    box-shadow: 0px 1px 1px 1px #ddd;
+}
+
+nav.my-navbar .menu,
+nav.my-navbar .menu-search {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+nav.my-navbar .menu a,
+nav.my-navbar .menu a:visited {
+    padding: 10px 15px;
+    color: #777777;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav.my-navbar .menu a:hover,
+nav.my-navbar .menu a:visited:hover {
+    color: #00a9e2;
+}
+
+nav.my-navbar .menu:hover .sub-menu-container {
+    display: block;
+    max-height: 60vh;
+    overflow-y: auto;
+    box-shadow: 0px 0px 5px 1px lightgray;
+}
+
+.menu {
+    z-index: 10;
+}
+
+nav.my-navbar .menu .sub-menu-container,
+nav.my-navbar .menu-search .sub-menu-container,
+nav.my-navbar .menu .sub-menu-container-small {
+    left: 0;
+    top: 100%;
+    min-width: 220px;
+    position: absolute;
+    background: white;
+    display: none;
+    border: 1px solid lightgray;
+    border-top: 0;
+    z-index: 1;
+    box-shadow: 0px 2px 3px 0px #ddd;
+    white-space: nowrap;
+}
+
+nav.my-navbar .menu .sub-menu-container .menu,
+nav.my-navbar .menu-search .sub-menu-container .menu,
+nav.my-navbar .menu .sub-menu-container-small .menu {
+    display: block;
+}
+
+nav.my-navbar .menu.selected > a,
+nav.my-navbar .menu.selected > a:visited {
+    color: #00a9e2;
+}
+
+nav.my-navbar .menu > .more {
+    max-height: 70vh;
+}
+
+@media only screen and (max-width: 800px) {
+    /* #large {
+        display: none;
+    }
+
+    #small {
+        display: block !important;
+    }
+
+    .sub-menu-container-small {
+        position: relative !important;
+        border: none !important;
+        left: 5% !important;
+        box-shadow: none !important;
+    }
+
+    .menu {
+        display: block !important;
+    }
+
+    .menu-responsive {
+        border-bottom: 1px solid lightgray;
+    } */
+
+    #app-name {
+        font-size: 2.5rem;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #app-name {
+        font-size: 2rem;
+        left: -70px;
+    }
+}
+
+.navbar-scroll {
+    height: 44px;
+}
+
+nav.my-navbar .menu .sub-menu-container .second-level-menu-container {
+    margin-left: 10%;
+    display: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a.clean-link {
+    text-decoration: none;
+    color: #777777;
+}
+
+a.clean-link:hover {
+    color: #bbbbbb;
+}

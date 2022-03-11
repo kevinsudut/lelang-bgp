@@ -17,13 +17,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 Route::group(['prefix' => 'auth'], function() {
-    Route::post('logout', [UserController::class, 'logout'])->name('logout');
+    Route::get('logout', [UserController::class, 'logout'])->name('logout');
 
     Route::group(['middleware' => 'guest'], function() {
         Route::group(['prefix' => 'login'], function() {

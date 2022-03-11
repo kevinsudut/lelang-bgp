@@ -228,7 +228,7 @@ footer {
     font-weight: bold;
 }
 
-#register-link a {
+#auth-link a {
     text-decoration: none;
     cursor: pointer;
     color: #00a9e2;
