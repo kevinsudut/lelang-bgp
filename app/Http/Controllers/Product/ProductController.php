@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Domains\Product\ProductRepository;
+use App\Helpers\Const\PageName;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
 use Illuminate\Http\Request;
@@ -19,6 +20,13 @@ class ProductController extends Controller
     public function index()
     {
 
+    }
+
+    public function myProduct(Request $request)
+    {
+        $products = $this->productRepository->filter($request, PageName::MY_PRODUCT);
+
+        return view('product.my-product.index', compact('products'));
     }
 
     public function store(CreateProductRequest $request)

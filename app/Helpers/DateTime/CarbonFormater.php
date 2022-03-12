@@ -14,20 +14,14 @@ class CarbonFormater
     /**
      * @param string|null $carbon
      * @param string $format
-     * @param bool $withLocalZone
      * @return string|string[]
      */
     public static function toGMT(
         string $carbon = null,
         string $format = 'D, M dS Y H:i:s',
-        bool $withLocalZone = true
     ) {
         $carbon = $carbon ? Carbon::parse($carbon) : Carbon::now();
-        if ($withLocalZone) {
-            $carbon = $carbon->format("$format TO");
-        } else {
-            $carbon = $carbon->format($format);
-        }
+        $carbon = $carbon->format("$format T");
         return Str::replaceFirst('WIB', 'GMT', $carbon);
     }
 

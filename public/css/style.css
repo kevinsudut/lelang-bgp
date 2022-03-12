@@ -364,3 +364,11 @@ a.clean-link {
 a.clean-link:hover {
     color: #bbbbbb;
 }
+
+.image-product {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
