@@ -39,7 +39,7 @@
             // tZ = date.toString().match(/([A-Z]+[\+-][0-9]+)/)[1],
             strDate = `${month[date.getMonth()]} ${('0' + d).slice(-2)}${nth} ${y}`,
             strTime = `${('0' + h).slice(-2)}:${('0' + m).slice(-2)}:${('0' + s).slice(-2)}`
-        return `${weekday[date.getDay()]}, ${strDate} ${strTime} GMT`
+        return `${weekday[date.getDay()]}, ${strDate} ${strTime} WIB`
     },
     request: function () {
         this.current = new Date(this.current.setSeconds(this.current.getSeconds() + 1))

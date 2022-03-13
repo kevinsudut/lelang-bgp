@@ -21,4 +21,9 @@ class Wallet extends Model
     {
         return $this->belongsTo(ProductBidHistory::class);
     }
+
+    public function walletHistories()
+    {
+        return $this->hasMany(WalletHistory::class)->orderBy('created_at', 'desc');
+    }
 }

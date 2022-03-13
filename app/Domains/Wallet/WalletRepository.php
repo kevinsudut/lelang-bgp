@@ -24,4 +24,21 @@ class WalletRepository extends Repository
         $model->amount = $data['amount'];
         return $model;
     }
+
+    public function topup($user, $amount)
+    {
+        $wallet = $this->getOneWhere(['user_id', '=', $user]);
+
+        if ($wallet) {
+            return $this->update($wallet->id, [
+                'user_id' => $user,
+                'amount' => $wallet->amount + $amount,
+            ]);
+        }
+
+        return $this->insert([
+            'user_id' => $user,
+            'amount' => $amount,
+        ]);
+    }
 }

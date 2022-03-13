@@ -22,7 +22,7 @@ class CarbonFormater
     ) {
         $carbon = $carbon ? Carbon::parse($carbon) : Carbon::now();
         $carbon = $carbon->format("$format T");
-        return Str::replaceFirst('WIB', 'GMT', $carbon);
+        return $carbon;
     }
 
     /**

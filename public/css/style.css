@@ -372,3 +372,27 @@ a.clean-link:hover {
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
+
+.gopay-amount-container {
+    margin: 0;
+    height: 100%;
+    box-shadow: 0px 0px 5px 5px lightgrey;
+    border-radius: 20px;
+}
+
+.gopay-amount {
+    position: relative;
+    top: 30%;
+    font-weight: bold;
+}
+
+.gopay-transaction-container {
+    max-height: 350px;
+    overflow: auto;
+}
+
+.btn-close {
+    position: absolute;
+    right: 2%;
+    font-weight: bold;
+}

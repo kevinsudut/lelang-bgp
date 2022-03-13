@@ -17,12 +17,32 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/message.js') }}"></script>
     <script>
         const BASE_URL = "{{ url('/') }}"
     </script>
 </head>
 
 <body>
+    <div id="message">
+        <div class="p-3 text-white">
+            <button type="button" class="btn-close btn-close-white btn-close" id="message-close" aria-label="Close"></button>
+            <strong id="message-content"></strong>
+        </div>
+    </div>
+
+    <script>
+        @if ($errors->any())
+        $.message('bg-danger', "{!! $errors->first() !!}")
+        @endif
+        @if (session()->has('success'))
+        $.message('bg-success', "{!! session()->get('success') !!}")
+        @php
+            session()->forget('success');
+        @endphp
+        @endif
+    </script>
+
     <header>
         <div class="container">
             <div class="d-inline-block">
@@ -53,6 +73,15 @@
             <div class="navbar-scroll">
                 <span class="menu">
                     <a href="{{ url('/') }}">Home</a>
+                </span>
+                <span class="menu">
+                    <a href="{{ url('wallet') }}">My Wallet</a>
+                </span>
+                <span class="menu">
+                    <a href="{{ url('product/my') }}">My Product</a>
+                </span>
+                <span class="menu">
+                    <a href="{{ url('product/bid') }}">My Bidding</a>
                 </span>
             </div>
 
