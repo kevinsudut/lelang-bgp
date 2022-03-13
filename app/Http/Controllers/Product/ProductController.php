@@ -31,6 +31,11 @@ class ProductController extends Controller
         return view('product.my-product.index', compact('products'));
     }
 
+    public function addProduct(Request $request)
+    {
+        return view('product.add-product.index');
+    }
+
     public function store(CreateProductRequest $request)
     {
         $product = $this->productRepository->insert([
