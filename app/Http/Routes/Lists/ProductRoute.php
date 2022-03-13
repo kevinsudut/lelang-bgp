@@ -15,7 +15,11 @@ class ProductRoute implements RouteInterface
             Route::get('my', [ProductController::class, 'myProduct']);
             Route::post('store', [ProductController::class, 'store']);
             Route::post('delete', [ProductController::class, 'destroy']);
-            Route::get('my-bid', [ProductBidHistoryController::class, 'index']);
+
+            Route::group(['prefix' => 'bid'], function() {
+                Route::get('my', [ProductBidHistoryController::class, 'index']);
+                Route::get('leaderboard', [ProductBidHistoryController::class, 'leaderboard']);
+            });
         });
     }
 }

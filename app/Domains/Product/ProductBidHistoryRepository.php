@@ -33,15 +33,20 @@ class ProductBidHistoryRepository extends Repository
         return $this->model->where('product_id', $product)->orderBy('amount', 'desc')->first();
     }
 
+    public function getBiddingByUserAndProduct($user, $product)
+    {
+        return $this->model->where('user_id', $user)->where('product_id', $product)->first();
+    }
+
     public function bidding($product, $user, $wallet, $amount) {
-        $history = $this->model->where('product_id', $product)->where('user_id', $user)->where('wallet_id', $wallet)->first();
+        $history = $this->getBiddingByUserAndProduct($user, $product);
 
         if ($history != null) {
             return $this->update($history->id, [
                 'product_id' => $product,
                 'user_id' => $user,
                 'wallet_id' => $wallet,
-                'amount' => $history->amount + $amount,
+                'amount' => $amount,
                 'status' => ProductBidHistory::BIDDING,
             ]);
         }
@@ -53,5 +58,10 @@ class ProductBidHistoryRepository extends Repository
             'amount' => $amount,
             'status' => ProductBidHistory::BIDDING,
         ]);
+    }
+
+    public function leaderboard($product)
+    {
+        return $this->model->where('product_id', $product)->selectRaw('COUNT(1) as count_participant, IFNULL(MAX(amount), 0) max_amount')->first();
     }
 }
