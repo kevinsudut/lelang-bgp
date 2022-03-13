@@ -68,6 +68,40 @@
         </div>
     </header>
 
+    <nav class="my-navbar sticky-top" id="small" style="display: none;">
+        <div class="container navbar navbar-light bg-white d-flex justify-content-between" style="box-shadow: 0px 1px 1px 1px #ddd;">
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#responsiveNavbarToggle"
+                    aria-controls="responsiveNavbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-flex">
+                <span class="menu">
+                    <a href="{{ url('auth/logout') }}">
+                        <span>Sign Out</span>
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        <div class="navbar-collapse collapse" id="responsiveNavbarToggle">
+            <div class="container bg-white p-4" style="max-height: 60vh; overflow-y: auto">
+                <span class="menu menu-responsive">
+                    <a href="{{ url('/') }}">Home</a>
+                </span>
+                <span class="menu menu-responsive">
+                    <a href="{{ url('wallet') }}">My Wallet</a>
+                </span>
+                <span class="menu menu-responsive">
+                    <a href="{{ url('product/my') }}">My Product</a>
+                </span>
+                <span class="menu menu-responsive">
+                    <a href="{{ url('product/bid') }}">My Bidding</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
     <nav class="my-navbar sticky-top" id="large">
         <div class="container d-flex justify-content-between py-0">
             <div class="navbar-scroll">

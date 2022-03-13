@@ -308,7 +308,7 @@ nav.my-navbar .menu > .more {
 }
 
 @media only screen and (max-width: 800px) {
-    /* #large {
+    #large {
         display: none;
     }
 
@@ -329,7 +329,7 @@ nav.my-navbar .menu > .more {
 
     .menu-responsive {
         border-bottom: 1px solid lightgray;
-    } */
+    }
 
     #app-name {
         font-size: 2.5rem;
