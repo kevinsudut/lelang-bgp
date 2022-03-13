@@ -5,6 +5,7 @@ use App\Http\Controllers\Product\ProductBidHistoryController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Routes\MyRoute;
+use App\Http\Controllers\Product\ProductController
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,6 @@ Route::group(['prefix' => 'auth'], function() {
 });
 
 Route::get('time', [TimeController::class, 'time']);
+Route::get('/product', [ProductController::class, 'productPage']);
 
 MyRoute::route();
