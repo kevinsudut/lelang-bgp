@@ -96,7 +96,7 @@
                     <a href="{{ url('product/my') }}">My Product</a>
                 </span>
                 <span class="menu menu-responsive">
-                    <a href="{{ url('product/bid') }}">My Bidding</a>
+                    <a href="{{ url('product/my-bid') }}">My Bidding</a>
                 </span>
             </div>
         </div>
@@ -115,7 +115,7 @@
                     <a href="{{ url('product/my') }}">My Product</a>
                 </span>
                 <span class="menu">
-                    <a href="{{ url('product/bid') }}">My Bidding</a>
+                    <a href="{{ url('product/my-bid') }}">My Bidding</a>
                 </span>
             </div>
 

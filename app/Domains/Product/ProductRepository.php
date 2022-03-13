@@ -57,6 +57,12 @@ class ProductRepository extends Repository
             $query = $query->where('user_id', auth()->user()->id);
         }
 
+        if ($source == PageName::MY_BID) {
+            $query = $query->whereHas('productBidHistories', function ($q) {
+                $q->where('user_id', auth()->user()->id);
+            });
+        }
+
         $query = $query->orderBy('start_time')->orderBy('end_time');
 
         return $query->paginate(8);

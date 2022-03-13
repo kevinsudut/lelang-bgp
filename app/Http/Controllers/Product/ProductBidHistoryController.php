@@ -7,9 +7,11 @@ use App\Domains\Product\ProductBidSnapshotRepository;
 use App\Domains\Product\ProductRepository;
 use App\Domains\Wallet\WalletHistoryRepository;
 use App\Domains\Wallet\WalletRepository;
+use App\Helpers\Const\PageName;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Bidding\BiddingLeaderboardRequest;
 use App\Http\Requests\Bidding\BiddingRequest;
+use Illuminate\Http\Request;
 
 class ProductBidHistoryController extends Controller
 {
@@ -33,8 +35,11 @@ class ProductBidHistoryController extends Controller
         $this->walletHistoryRepository = $walletHistoryRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $products = $this->productRepository->filter($request, PageName::MY_BID);
+
+        return view('product.my-bid.index', compact('products'));
     }
 
     public function bidding(BiddingRequest $request)
