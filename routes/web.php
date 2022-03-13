@@ -5,7 +5,7 @@ use App\Http\Controllers\Product\ProductBidHistoryController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Routes\MyRoute;
-use App\Http\Controllers\Product\ProductController
+use App\Http\Controllers\Product\ProductController;
 
 /*
 |--------------------------------------------------------------------------
