@@ -57,12 +57,12 @@ class ProductBidHistoryController extends Controller
         $userBidding = $this->productBidHistoryRepository->getBiddingByUserAndProduct(auth()->user()->id, $productId);
         $lastBidding = $this->productBidHistoryRepository->getLargestBidding($productId);
 
-        if ($lastBidding != null && $lastBidding->amount <= $amount) {
+        if ($lastBidding != null && $amount <= $lastBidding->amount) {
             $response['message'] = "Your bidding amount can't same with last bidding amount";
             return response()->json($response);
         }
 
-        if ($amount < $product->start_bid) {
+        if ($lastBidding == null && $amount < $product->start_bid) {
             $response['message'] = "Your bidding amount can't less than product start bidding price";
             return response()->json($response);
         }
