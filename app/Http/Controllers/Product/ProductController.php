@@ -6,6 +6,8 @@ use App\Domains\Product\ProductRepository;
 use App\Helpers\Const\PageName;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
+use App\Jobs\AuctionWinnerJob;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -31,7 +33,7 @@ class ProductController extends Controller
 
     public function store(CreateProductRequest $request)
     {
-        $this->productRepository->insert([
+        $product = $this->productRepository->insert([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
             'image' => $request->file('image')->store('product'),
@@ -40,5 +42,10 @@ class ProductController extends Controller
             'start_bid' => $request->get('start_bid'),
             'minimum_bid' => $request->get('minimum_bid'),
         ]);
+
+        $jobEndTime = Carbon::parse($product->end_time)->addSeconds(5);
+        AuctionWinnerJob::dispatch($product->id)->delay($jobEndTime);
+
+        return redirect()->back()->with('success', 'Successfully add a new product');
     }
 }

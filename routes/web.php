@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Account\UserController;
+use App\Http\Controllers\Product\ProductBidHistoryController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Routes\MyRoute;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
