@@ -12,7 +12,8 @@ class ProductRoute implements RouteInterface
     {
         Route::group(['prefix' => 'product'], function() {
             Route::get('my', [ProductController::class, 'myProduct']);
-            Route::get('add', [ProductController::class, 'addProduct']);
+            Route::post('store', [ProductController::class, 'store']);
+            Route::post('delete', [ProductController::class, 'destroy']);
         });
     }
 }

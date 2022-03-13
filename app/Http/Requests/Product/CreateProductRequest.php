@@ -27,8 +27,8 @@ class CreateProductRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'image' => 'required|image|max:2048',
-            'start_time' => 'required|date_format:Y-m-d H:i:s',
-            'end_time' => 'required|date_format:Y-m-d H:i:s|after:start_time',
+            'start_time' => 'required|date_format:Y-m-d\TH:i|after:tomorrow',
+            'end_time' => 'required|date_format:Y-m-d\TH:i|after:start_time',
             'start_bid' => 'required|numeric',
             'minimum_bid' => 'required|numeric',
         ];

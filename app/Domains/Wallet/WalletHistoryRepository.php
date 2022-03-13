@@ -3,7 +3,6 @@
 namespace App\Domains\Wallet;
 
 use App\Domains\Core\Repository;
-use App\Models\Wallet\Wallet;
 use App\Models\Wallet\WalletHistory;
 use Illuminate\Database\Eloquent\Model;
 

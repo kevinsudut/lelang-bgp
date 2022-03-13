@@ -134,6 +134,44 @@
         @yield('content')
     </div>
 
+    <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Permanently</h4>
+                    <button type="button" class="btn-close btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure about this ?</p>
+                    <form action="" method="post" id="form-delete" class="d-none">
+                        @csrf
+                        <input type="hidden" name="id" required>
+                        <button>Click</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="confirm">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            $('#confirmDelete').on('show.bs.modal', function (e) {
+                var form = $(e.relatedTarget).closest('form').eq(0)
+                var action = form.attr('action')
+                var id = form.find("input[name='id']").val()
+                $(this).find('#form-delete').attr('action', action)
+                $(this).find("#form-delete input[name='id']").attr('value', id)
+            })
+            $('#confirmDelete').on('click', '#confirm', function (e) {
+                $('#confirmDelete').find('#form-delete').submit()
+            })
+        })()
+    </script>
+
     <script src="{{ asset('js/time.js') }}"></script>
 </body>
 

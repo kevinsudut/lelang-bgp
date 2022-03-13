@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-6 mb-3" style="min-height: 100px;">
                 <div class="gopay-amount-container text-center">
-                    <h1 class="m-0 gopay-amount">{{ "IDR " . number_format($wallet->amount ?? 0) }}</h1>
+                    <h1 class="m-0 gopay-amount">{{ $wallet->ammountFormat ?? "IDR 0" }}</h1>
                 </div>
             </div>
             <div class="col-md-6">
@@ -44,7 +44,7 @@
                                 <span>Transaction on {{ $CarbonFormater->toGMT($history->created_at) }}</span>
                             </div>
                             <h5>
-                                <span class="badge {{ $history->typeCss() }} p-2 rounded-3">{{ "IDR " . number_format($history->amount ?? 0) }}</span>
+                                <span class="badge {{ $history->typeCss() }} p-2 rounded-3">{{ $history->amountFormat ?? "IDR 0" }}</span>
                             </h5>
                         </li>
                     </ol>

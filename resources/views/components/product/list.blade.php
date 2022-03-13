@@ -1,3 +1,5 @@
+@inject('PageName', '\App\Helpers\Const\PageName')
+
 <div class="card card-body mb-3">
     <form action="" method="get">
         <div class="row g-3 align-items-center">
@@ -29,7 +31,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card mb-4">
                 <div>
-                    <div class="card-img-top image-product" style="background-image: url('{{ $ConvertImage->toBase64("product/tokopedia.jpg"); }}');"></div>
+                    <div class="card-img-top image-product" style="background-image: url('{{ $ConvertImage->toBase64($product->image); }}');"></div>
                     <h3 class="m-0">
                         @php
                             $text = "In Progress";
@@ -68,6 +70,18 @@
                             <div>{{ $CarbonFormater->toGMT($product->end_time) }}</div>
                         </div>
                     </div>
+                    @if ($source == $PageName::MY_PRODUCT)
+                        @can('delete-product', $product)
+                            <div class="position-absolute" style="right: 5px; bottom: 140px;">
+                                <form action="{{ url('product/delete') }}" method="post">
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <button class="btn btn-sm btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+                                        <i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Delete"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        @endcan
+                    @endif
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Posted by {{ $product->user->name }}</small>

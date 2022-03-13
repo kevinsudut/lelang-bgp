@@ -19,12 +19,35 @@ class WalletHistory extends Model
         return $this->belongsTo(Wallet::class);
     }
 
+    public function getAmountFormatAttribute()
+    {
+        $amount = 0;
+
+        if ($this->type == WalletHistory::TOP_UP || $this->type == WalletHistory::REFUND) {
+            $amount = 'IDR ' . number_format($this->amount);
+        }
+
+        if ($this->type == WalletHistory::DEDUCT) {
+            $amount = 'IDR -' . number_format($this->amount);
+        }
+
+        return $amount;
+    }
+
     public function typeStr()
     {
         $str = "";
 
-        if ($this->type == 1) {
+        if ($this->type == WalletHistory::TOP_UP) {
             $str = "GoPay top up";
+        }
+
+        if ($this->type == WalletHistory::REFUND) {
+            $str = "GoPay refund";
+        }
+
+        if ($this->type == WalletHistory::DEDUCT) {
+            $str = "GoPay deduct";
         }
 
         return $str;
@@ -34,8 +57,12 @@ class WalletHistory extends Model
     {
         $css = "";
 
-        if ($this->type == 1) {
+        if ($this->type == WalletHistory::TOP_UP || $this->type == WalletHistory::REFUND) {
             $css = "bg-success";
+        }
+
+        if ($this->type == WalletHistory::DEDUCT) {
+            $css = "bg-danger";
         }
 
         return $css;

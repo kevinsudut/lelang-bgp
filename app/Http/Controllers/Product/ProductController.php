@@ -6,9 +6,11 @@ use App\Domains\Product\ProductRepository;
 use App\Helpers\Const\PageName;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
+use App\Http\Requests\Product\DeleteProductRequest;
 use App\Jobs\AuctionWinnerJob;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -31,14 +33,10 @@ class ProductController extends Controller
         return view('product.my-product.index', compact('products'));
     }
 
-    public function addProduct(Request $request)
-    {
-        return view('product.add-product.index');
-    }
-
     public function store(CreateProductRequest $request)
     {
         $product = $this->productRepository->insert([
+            'user_id' => auth()->user()->id,
             'name' => $request->get('name'),
             'description' => $request->get('description'),
             'image' => $request->file('image')->store('product'),
@@ -52,5 +50,17 @@ class ProductController extends Controller
         AuctionWinnerJob::dispatch($product->id)->delay($jobEndTime);
 
         return redirect()->back()->with('success', 'Successfully add a new product');
+    }
+
+    public function destroy(DeleteProductRequest $request)
+    {
+        $product = $this->productRepository->getById($request->get('id'));
+
+        if (Gate::allows('delete-product', $product)) {
+            $this->productRepository->delete($product->id);
+            return redirect()->back()->with('success', 'Successfully delete product');
+        }
+
+        return redirect()->back()->withErrors('401 UNAUTHORIZED');
     }
 }

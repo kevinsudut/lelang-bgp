@@ -12,6 +12,11 @@ class Wallet extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public function getAmmountFormatAttribute()
+    {
+        return 'IDR ' . number_format($this->amount);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
