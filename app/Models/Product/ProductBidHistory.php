@@ -10,6 +10,10 @@ class ProductBidHistory extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public const BIDDING = 1;
+    public const REFUND = 2;
+    public const WINNER = 3;
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -18,5 +22,10 @@ class ProductBidHistory extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function productBidSnapshots()
+    {
+        return $this->hasMany(ProductBidSnapshot::class);
     }
 }

@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_bid_histories', function (Blueprint $table) {
+        Schema::create('product_bid_snapshots', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('product_bid_history_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('wallet_id');
             $table->bigInteger('amount');
-            $table->smallInteger('status');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade');
+            $table->foreign('product_bid_history_id')->references('id')->on('product_bid_histories')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
-            $table->foreign('wallet_id')->references('id')->on('wallets')->onUpdate('cascade');
         });
     }
 
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_bid_histories');
+        Schema::dropIfExists('product_bid_snapshots');
     }
 };

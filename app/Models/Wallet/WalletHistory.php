@@ -11,7 +11,7 @@ class WalletHistory extends Model
     use HasFactory, SoftDeletes;
 
     public const TOP_UP = 1;
-    public const PAY = 2;
+    public const DEDUCT = 2;
     public const REFUND = 3;
 
     public function wallet()
@@ -35,9 +35,9 @@ class WalletHistory extends Model
         $css = "";
 
         if ($this->type == 1) {
-            $str = "bg-success";
+            $css = "bg-success";
         }
 
-        return $str;
+        return $css;
     }
 }

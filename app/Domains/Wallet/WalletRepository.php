@@ -41,4 +41,18 @@ class WalletRepository extends Repository
             'amount' => $amount,
         ]);
     }
+
+    public function deduct($user, $amount)
+    {
+        $wallet = $this->getOneWhere(['user_id', '=', $user]);
+
+        if ($wallet) {
+            return $this->update($wallet->id, [
+                'user_id' => $user,
+                'amount' => $wallet->amount - $amount,
+            ]);
+        }
+
+        return new Wallet();
+    }
 }

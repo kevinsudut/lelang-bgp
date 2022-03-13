@@ -35,4 +35,22 @@ class WalletHistoryRepository extends Repository
             'type' => WalletHistory::TOP_UP,
         ]);
     }
+
+    public function deduct($wallet, $amount)
+    {
+        return $this->insert([
+            'wallet_id' => $wallet,
+            'amount' => $amount,
+            'type' => WalletHistory::DEDUCT,
+        ]);
+    }
+
+    public function refund($wallet, $amount)
+    {
+        return $this->insert([
+            'wallet_id' => $wallet,
+            'amount' => $amount,
+            'type' => WalletHistory::REFUND,
+        ]);
+    }
 }

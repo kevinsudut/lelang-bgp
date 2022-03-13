@@ -3,12 +3,14 @@
 namespace App\Models\Account;
 
 use App\Models\Product\Product;
+use App\Models\Product\ProductBidSnapshot;
 use App\Models\Wallet\Wallet;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -45,6 +47,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function maskName()
+    {
+        $mask = '';
+
+        $maskArr = [];
+        $nameArr = explode(' ', $this->name);
+
+        foreach ($nameArr as $arr) {
+            if (strlen($arr) <= 3) {
+                $maskArr[] = Str::of($arr)->mask('*', 0);
+                continue;
+            }
+
+            $maskArr[] = Str::of($arr)->mask('*', 3);
+        }
+
+        $mask = implode(' ', $maskArr);
+
+        return $mask;
+    }
+
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
@@ -53,5 +76,10 @@ class User extends Authenticatable
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function productBidSnapshots()
+    {
+        return $this->hasMany(ProductBidSnapshot::class);
     }
 }
