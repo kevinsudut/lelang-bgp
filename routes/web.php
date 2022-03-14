@@ -35,6 +35,5 @@ Route::group(['prefix' => 'auth'], function() {
 });
 
 Route::get('time', [TimeController::class, 'time']);
-Route::get('/product', [ProductController::class, 'productPage']);
 
 MyRoute::route();

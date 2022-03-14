@@ -57,12 +57,12 @@ class ProductBidHistoryController extends Controller
         $now = Carbon::now();
 
         if (Carbon::parse($product->start_time)->isAfter($now)) {
-            $response['message'] = "Auction not already started";
+            $response['message'] = "Auction has not started";
             return response()->json($response);
         }
 
         if (Carbon::parse($product->end_time)->isBefore($now)) {
-            $response['message'] = "Auction already ended";
+            $response['message'] = "Auction has ended";
             return response()->json($response);
         }
 
@@ -70,12 +70,12 @@ class ProductBidHistoryController extends Controller
         $lastBidding = $this->productBidHistoryRepository->getLargestBidding($productId);
 
         if ($lastBidding != null && $amount <= $lastBidding->amount) {
-            $response['message'] = "Your bidding amount can't same with last bidding amount";
+            $response['message'] = "Your bidding amount can't be the same as the current bid amount";
             return response()->json($response);
         }
 
         if ($lastBidding == null && $amount < $product->start_bid) {
-            $response['message'] = "Your bidding amount can't less than product start bidding price";
+            $response['message'] = "Your bidding amount can't be less than the product start bidding price";
             return response()->json($response);
         }
 
@@ -117,7 +117,7 @@ class ProductBidHistoryController extends Controller
         $this->walletHistoryRepository->deduct($wallet->id, $deductAmount);
 
         $response['success'] = true;
-        $response['message'] = "Successfully bidding";
+        $response['message'] = "Successfully placed your bid";
 
         return response()->json($response);
     }

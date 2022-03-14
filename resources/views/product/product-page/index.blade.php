@@ -22,16 +22,17 @@
                 @endif
                 <h5>Time left: 6d 10h | Sun, 11:30am</h5>
                 <br/>
-                <form action="#" id="form-bidding">
+                <form action="{{ url('bid/bidding') }}" method="post" id="form-bidding">
                     <input type="hidden" name="id" value="{{ $product->id }}">
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="amount" placeholder="e.g. 10000"/>
+                                <!-- min diganti jadi highest bid + minimum bid -->
+                                <input type="number" class="form-control" name="amount" id="amount" placeholder="e.g. 10000" min="0"/> 
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary form-control">
                                 Place Bid
                             </button>
                         </div>
