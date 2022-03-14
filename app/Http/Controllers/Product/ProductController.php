@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Domains\Product\ProductRepository;
+use App\Domains\Product\ProductBidHistoryRepository;
 use App\Helpers\Const\PageName;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductRequest;
@@ -15,10 +16,12 @@ use Illuminate\Support\Facades\Gate;
 class ProductController extends Controller
 {
     private $productRepository;
+    private $productBidHistoryRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository, ProductBidHistoryRepository $productBidHistoryRepository)
     {
         $this->productRepository = $productRepository;
+        $this->productBidHistoryRepository = $productBidHistoryRepository;
     }
 
     public function index()
@@ -36,11 +39,12 @@ class ProductController extends Controller
     public function productPage($id)
     {
         $product = $this->productRepository->getById($id);
+        $lastbid = $this->productBidHistoryRepository->getLargestBidding($product);
         if ($product == null) {
             return redirect('/');
         }
 
-        return view('product.product-page.index', compact('product'));
+        return view('product.product-page.index', compact('product', 'lastbid'));
     }
 
     public function store(CreateProductRequest $request)
