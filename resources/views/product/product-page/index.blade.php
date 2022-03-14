@@ -17,7 +17,9 @@
                         <span id="more" style="display:  none;">{{ substr($product->description, 300) }}</span>
                     @endif
                 <button class="btn btn-link btn-small" onclick="myFunc()" id="myBtn">Read more</button>
-                <h4>Current Bid: Rp 10.000.000,- by Ind** Ke****</h4>
+                @if ($lastbid)
+                    <div class="w-25 form-label fw-bold"> Current Bid : {{$lastbid->amount}}</div>
+                @endif
                 <h5>Time left: 6d 10h | Sun, 11:30am</h5>
                 <br/>
                 <form action="#" id="form-bidding">
