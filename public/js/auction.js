@@ -2,7 +2,7 @@
     $('#form-bidding').on('submit', function(e) {
         e.preventDefault()
 
-        const id = $(this).find("input[type='hidden']").val()
+        const id = $(this).find("input:hidden[name=id]").val()
         const amount = $(this).find('#amount')
 
         axios.post(`${BASE_URL}/product/bid/bidding`, {
@@ -44,3 +44,20 @@ var myFunc = function(){
         moreText.style.display = "inline";
     }
 }
+
+$('#clock').countdown($('input[name=endtime]').val())
+.on('update.countdown', function(event) {
+  var format = '%H:%M:%S';
+  if(event.offset.totalDays > 0) {
+    format = 'Time left: %-d day%!d ' + format;
+  }
+  if(event.offset.weeks > 0) {
+    format = 'Time left: %-w week%!w ' + format;
+  }
+  $(this).html(event.strftime(format));
+})
+.on('finish.countdown', function(event) {
+  $(this).html('This offer has expired!')
+    .parent().addClass('disabled');
+
+});

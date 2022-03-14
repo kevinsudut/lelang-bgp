@@ -39,12 +39,13 @@ class ProductController extends Controller
     public function productPage($id)
     {
         $product = $this->productRepository->getById($id);
-        $lastbid = $this->productBidHistoryRepository->getLargestBidding($product);
+        $lastbid = $this->productBidHistoryRepository->getLargestBidding($product->id);
+        $user = auth()->user()->id;
         if ($product == null) {
             return redirect('/');
         }
 
-        return view('product.product-page.index', compact('product', 'lastbid'));
+        return view('product.product-page.index', compact('product', 'lastbid', 'user'));
     }
 
     public function store(CreateProductRequest $request)

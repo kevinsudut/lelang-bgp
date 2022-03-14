@@ -5,6 +5,7 @@
 
 @section('content')
     <div class="container-fluid" style="padding: 2em 4em">
+        <input type="hidden" name="endtime" value="{{ $product->end_time }}">
         <div class="row">
             <div class="col-md-4">
                 <img alt="product" src="{{ $ConvertImage->toBase64($product->image) }}" alt="product" style="width: 100%"/>
@@ -19,33 +20,35 @@
                 <button class="btn btn-link btn-small" onclick="myFunc()" id="myBtn">Read more</button>
                 @if ($lastbid)
                     <div class="w-25 form-label fw-bold"> Current Bid : {{$lastbid->amount}}</div>
+                @else
+                    <div class="w-25 form-label fw-bold"> Current Bid : 0</div>
                 @endif
-                <h5>Time left: 6d 10h | Sun, 11:30am</h5>
-                <br/>
-                <form action="{{ url('bid/bidding') }}" method="post" id="form-bidding">
-                    <input type="hidden" name="id" value="{{ $product->id }}">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <!-- min diganti jadi highest bid + minimum bid -->
-                                <input type="number" class="form-control" name="amount" id="amount" placeholder="e.g. 10000" min="0"/> 
+                <div id="clock"></div>
+                @if ($product->user_id !== $user)
+                    <form action="{{ url('bid/bidding') }}" method="post" id="form-bidding">
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <!-- min diganti jadi highest bid + minimum bid -->
+                                    <input type="number" class="form-control" name="amount" id="amount" placeholder="min. {{$lastbid->amount ?? $product->start_bid}}" min="{{$lastbid->amount ?? $product->start_bid}}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary form-control">
+                                    Place Bid
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary form-control">
-                                Place Bid
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <br/>
-                <p>
-                    1000 bids
-                </p>
+                    </form>
+                @else
+                    <div class=" form-label font-weight-bold text-danger"> This is your product, you can't bid it</div>
+                @endif
             </div>
         </div>
     </div>
 
+    <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('js/auction.js') }}"></script>
 
 @endsection
