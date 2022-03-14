@@ -11,7 +11,12 @@
             </div>
             <div class="col-md-8">
                 <h3>{{ $product->name }}</h3>
-                <p>{!! nl2br(htmlentities($product->description)) !!}</p>
+                    {!! \Illuminate\Support\Str::limit(($product->description), 300, '') !!}
+                    @if (strlen($product->description) > 300)
+                        <span id="dots">...</span>
+                        <span id="more" style="display:  none;">{{ substr($product->description, 300) }}</span>
+                    @endif
+                <button class="btn btn-link btn-small" onclick="myFunc()" id="myBtn">Read more</button>
                 <h4>Current Bid: Rp 10.000.000,- by Ind** Ke****</h4>
                 <h5>Time left: 6d 10h | Sun, 11:30am</h5>
                 <br/>
@@ -38,6 +43,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('js/auction.js') }}"></script>
     <script src="{{ asset('js/auction.js') }}"></script>
 
 @endsection
