@@ -42,7 +42,7 @@
                         </div>
                     </form>
                 @else
-                    <div class=" form-label font-weight-bold text-danger"> This is your product, you can't bid it</div>
+                    <div class="form-label fw-bold text-danger"> This is your product, you can't bid it</div>
                 @endif
             </div>
         </div>
