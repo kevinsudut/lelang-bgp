@@ -30,7 +30,7 @@
     @foreach ($products as $product)
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card mb-4">
-                <div>
+                <a href="{{ url("product/{$product->id}") }}">
                     <div class="card-img-top image-product" style="background-image: url('{{ $ConvertImage->toBase64($product->image); }}');"></div>
                     <h3 class="m-0">
                         @php
@@ -50,7 +50,7 @@
                     <h3 class="mb-0 position-relative">
                         <span class="badge bg-secondary p-2 rounded-3 position-absolute" style="left: 5px; top: -22px;">{{ "IDR " . number_format($product->start_bid) }}</span>
                     </h3>
-                </div>
+                </a>
                 <div class="card-body">
                     <div class="text-center">
                         <h5 class="card-title">{{ $product->name }}</h5>

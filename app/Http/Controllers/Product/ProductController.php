@@ -33,8 +33,14 @@ class ProductController extends Controller
         return view('product.my-product.index', compact('products'));
     }
 
-    public function productPage() {
-        return view('product.product-page.index');
+    public function productPage($id)
+    {
+        $product = $this->productRepository->getById($id);
+        if ($product == null) {
+            return redirect('/');
+        }
+
+        return view('product.product-page.index', compact('product'));
     }
 
     public function store(CreateProductRequest $request)

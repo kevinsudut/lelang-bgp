@@ -11,6 +11,7 @@ use App\Helpers\Const\PageName;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Bidding\BiddingLeaderboardRequest;
 use App\Http\Requests\Bidding\BiddingRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductBidHistoryController extends Controller
@@ -49,10 +50,21 @@ class ProductBidHistoryController extends Controller
             'message' => '',
         ];
 
-        $productId = $request->get('product_id');
+        $productId = $request->get('id');
         $amount = $request->get('amount');
 
         $product = $this->productRepository->getById($productId);
+        $now = Carbon::now();
+
+        if (Carbon::parse($product->start_time)->isAfter($now)) {
+            $response['message'] = "Auction not already started";
+            return response()->json($response);
+        }
+
+        if (Carbon::parse($product->end_time)->isBefore($now)) {
+            $response['message'] = "Auction already ended";
+            return response()->json($response);
+        }
 
         $userBidding = $this->productBidHistoryRepository->getBiddingByUserAndProduct(auth()->user()->id, $productId);
         $lastBidding = $this->productBidHistoryRepository->getLargestBidding($productId);

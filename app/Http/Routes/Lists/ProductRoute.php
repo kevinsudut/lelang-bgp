@@ -13,12 +13,13 @@ class ProductRoute implements RouteInterface
     {
         Route::group(['prefix' => 'product'], function() {
             Route::get('my', [ProductController::class, 'myProduct']);
+            Route::get('{id}', [ProductController::class, 'productPage']);
             Route::post('store', [ProductController::class, 'store']);
             Route::post('delete', [ProductController::class, 'destroy']);
 
             Route::group(['prefix' => 'bid'], function() {
                 Route::get('my', [ProductBidHistoryController::class, 'index']);
-                // Route::get('test', [ProductBidHistoryController::class, 'bidding']);
+                Route::post('bidding', [ProductBidHistoryController::class, 'bidding']);
                 Route::get('leaderboard', [ProductBidHistoryController::class, 'leaderboard']);
             });
         });

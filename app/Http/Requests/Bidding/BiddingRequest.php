@@ -24,7 +24,8 @@ class BiddingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'required|numeric|exists:products,id',
+            'amount' => 'required|numeric|min:0',
         ];
     }
 }
