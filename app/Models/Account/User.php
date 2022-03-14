@@ -2,6 +2,7 @@
 
 namespace App\Models\Account;
 
+use App\Models\Notification\Notification;
 use App\Models\Product\Product;
 use App\Models\Product\ProductBidSnapshot;
 use App\Models\Wallet\Wallet;
@@ -68,6 +69,22 @@ class User extends Authenticatable
         return $mask;
     }
 
+    public function getCountUnreadNotificationAttribute()
+    {
+        return Notification::where('user_id', $this->id)
+            ->where('is_read', 0)
+            ->count();
+    }
+
+    public function getUnreadNotification($take)
+    {
+        return Notification::where('user_id', $this->id)
+            ->where('is_read', 0)
+            ->orderBy('created_at', 'desc')
+            ->take($take)
+            ->get();
+    }
+
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
@@ -81,5 +98,10 @@ class User extends Authenticatable
     public function productBidSnapshots()
     {
         return $this->hasMany(ProductBidSnapshot::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

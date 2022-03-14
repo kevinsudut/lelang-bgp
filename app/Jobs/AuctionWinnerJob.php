@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Domains\Notification\NotificationRepository;
 use App\Domains\Product\ProductBidHistoryRepository;
 use App\Domains\Product\ProductRepository;
 use App\Domains\Wallet\WalletHistoryRepository;
@@ -41,6 +42,7 @@ class AuctionWinnerJob implements ShouldQueue
         ProductBidHistoryRepository $productBidHistoryRepository,
         WalletRepository $walletRepository,
         WalletHistoryRepository $walletHistoryRepository,
+        NotificationRepository $notificationRepository,
     ) {
         try {
             $product = $productRepository->getById($this->data);
@@ -62,6 +64,13 @@ class AuctionWinnerJob implements ShouldQueue
                         $history->save();
 
                         $loop++;
+
+                        $notificationRepository->insert([
+                            'user_id' => $history->user_id,
+                            'message' => "Congratulation you are the winner for auction product {$product->name}.",
+                            'is_read' => 0,
+                            'url' => "product/{$product->id}",
+                        ]);
                         continue;
                     }
 
@@ -74,7 +83,21 @@ class AuctionWinnerJob implements ShouldQueue
 
                     // insert wallet transaction
                     $walletHistoryRepository->refund($history->wallet_id, $history->amount);
+
+                    $notificationRepository->insert([
+                        'user_id' => $history->user_id,
+                        'message' => "Sorry you are not the winner for auction product {$product->name}. The money already refund to your wallet.",
+                        'is_read' => 0,
+                        'url' => "product/{$product->id}",
+                    ]);
                 }
+
+                $notificationRepository->insert([
+                    'user_id' => $product->user_id,
+                    'message' => "Auction for product {$product->name} already finished.",
+                    'is_read' => 0,
+                    'url' => "product/{$product->id}",
+                ]);
             }
 
             Log::info("Finish AuctionWinnerJob For Product ID {$product->id}");

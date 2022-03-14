@@ -13,6 +13,7 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/icon144.png') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/notification.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
@@ -22,6 +23,10 @@
         const BASE_URL = "{{ url('/') }}"
     </script>
 </head>
+
+@php
+    $unread = auth()->user()->CountUnreadNotification;
+@endphp
 
 <body>
     <div id="message">
@@ -76,6 +81,13 @@
             </button>
             <div class="d-flex">
                 <span class="menu">
+                    <a href="{{ url('notification') }}" id="notif-button-small">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-notification">{{ $unread }}</span>
+                    </a>
+                </span>
+
+                <span class="menu">
                     <a href="{{ url('auth/logout') }}">
                         <span>Sign Out</span>
                         <i class="fas fa-sign-out-alt"></i>
@@ -120,6 +132,39 @@
             </div>
 
             <div>
+                <span class="menu pl-3">
+                    <a id="notif-button" style="display: contents">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-notification">{{ $unread }}</span>
+                    </a>
+                    <div class="notif-container" id="notif-container" style="display: none;">
+                        <div class="notif-option" id="notif-option">
+                            <span>Notifications</span>
+                            <button class="btn btn-info btn-sm" title="View all notifications"
+                                    onclick="window.location.href='{{ url('notification') }}'">View All</button>
+                            <button class="btn btn-info btn-sm" title="Mark all as read"
+                                    onclick="window.location.href='{{ url('notification/read-all') }}'">
+                                <i class="fas fa-check-circle"></i>
+                            </button>
+                        </div>
+                        <div class="notif-item-container">
+                            @if ($unread > 0)
+                                @foreach (auth()->user()->getUnreadNotification(20) as $notification)
+                                    <a class="notif-item" href="{{ url("notification/{$notification->id}") }}">
+                                        <span>{!! $notification->message !!}</span>
+                                        <div class="mt-2 text-right">
+                                            {{ $CarbonFormater->toGMT($notification->created_at) }}
+                                        </div>
+                                    </a>
+                                @endforeach
+                                <span class="notif-item"></span>
+                            @else
+                                <span class="notif-item">No new notification.</span>
+                            @endif
+                        </div>
+                    </div>
+                </span>
+
                 <span class="menu">
                     <a href="{{ url('auth/logout') }}">
                         <span>Sign Out</span>
@@ -173,6 +218,9 @@
     </script>
 
     <script src="{{ asset('js/time.js') }}"></script>
+    <script src="{{ asset('js/navbar-overflow.js') }}"></script>
+    <script src="{{ asset('js/notification.js') }}"></script>
+
 </body>
 
 </html>

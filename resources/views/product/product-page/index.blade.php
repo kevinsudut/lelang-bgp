@@ -46,6 +46,5 @@
     </div>
 
     <script src="{{ asset('js/auction.js') }}"></script>
-    <script src="{{ asset('js/auction.js') }}"></script>
 
 @endsection
