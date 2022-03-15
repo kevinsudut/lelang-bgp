@@ -14,6 +14,15 @@
             if (response.data.success) {
                 css = 'bg-success'
                 amount.val('')
+
+                $('#no-bidding').remove()
+                $('#leaderboard').html(`
+                    <div class="fw-bold mb-2">Current Bid: ${response.data.leaderboard.amount} | ${response.data.leaderboard.user}</div>
+                    <div class="fw-bold mb-2">Total Participant: ${response.data.leaderboard.count_participant}</div>
+                    <div class="mb-2">
+                        <button class="btn btn-sm btn-primary" id="btn-leaderboard">View Leaderboard</button>
+                    </div>
+                `)
             }
             $.message(css, response.data.message)
         })
@@ -59,6 +68,48 @@
             </div>
         `)
         .parent().addClass('disabled')
+
+        Notification.requestPermission().then(function (permission) {
+            if (permission == 'granted') {
+                const notification = new Notification('Lelang BGP Notification!', {
+                    body: 'Sorry, the bid has been finished.',
+                    badge: `${BASE_URL}/assets/icon144.png`,
+                    icon: `${BASE_URL}/assets/icon144.png`,
+                })
+
+                const audio = new Audio(`${BASE_URL}/sounds/alarm.mp3`)
+                audio.volume = 1
+                audio.play()
+
+                notification.addEventListener('click', function () {
+                    notification.close()
+                })
+            }
+        })
     })
 
+    setInterval(function() {
+        axios.post(`${BASE_URL}/product/bid/leaderboard`, {
+            id: PRODUCT_ID,
+        })
+        .then(function(response) {
+            if (response.data) {
+                $('#no-bidding').remove()
+                $('#leaderboard').html(`
+                    <div class="fw-bold mb-2">Current Bid: ${response.data.amount} | ${response.data.user}</div>
+                    <div class="fw-bold mb-2">Total Participant: ${response.data.count_participant}</div>
+                    <div class="mb-2">
+                        <button class="btn btn-sm btn-primary" id="btn-leaderboard">View Leaderboard</button>
+                    </div>
+                `)
+            }
+        })
+        .catch(function(error) {
+            if (error.response) {
+                $.message('bg-danger', error.response.data.message)
+            } else {
+                $.message('bg-danger', error.message)
+            }
+        })
+    }, 1000)
 })()

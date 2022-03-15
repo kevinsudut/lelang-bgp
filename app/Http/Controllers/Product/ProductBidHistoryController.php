@@ -49,6 +49,7 @@ class ProductBidHistoryController extends Controller
         $response = [
             'success' => false,
             'message' => '',
+            'leaderboard' => null,
         ];
 
         $productId = $request->get('id');
@@ -124,12 +125,25 @@ class ProductBidHistoryController extends Controller
 
         $response['success'] = true;
         $response['message'] = "Successfully placed your bid";
+        $response['leaderboard'] = $this->getCurrentLeaderboard($product->id);
 
         return response()->json($response);
     }
 
+    public function getCurrentLeaderboard($productId)
+    {
+        $largestbid = $this->productBidHistoryRepository->getLargestBidding($productId);
+        $leaderboard = $this->productBidHistoryRepository->leaderboard($productId);
+
+        return [
+            'count_participant' => $leaderboard->count_participant,
+            'amount' => "IDR " . number_format($leaderboard->max_amount),
+            'user' => $largestbid->user->mask_name,
+        ];
+    }
+
     public function leaderboard(BiddingLeaderboardRequest $request)
     {
-        dd($this->productBidHistoryRepository->leaderboard($request->get('id')));
+        return response()->json($this->getCurrentLeaderboard($request->get('id')));
     }
 }

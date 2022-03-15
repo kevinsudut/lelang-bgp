@@ -6,6 +6,7 @@
 @section('content')
     <script>
         const END_TIME = "{{ $product->end_time }}"
+        const PRODUCT_ID = "{{ $product->id }}"
     </script>
 
     <div class="p-2">
@@ -27,16 +28,18 @@
                         <span class="btn btn-link" id="btn-read-more">Read more</span>
                     @endif
                 </p>
-                @if ($lastbid)
-                    <div class="fw-bold mb-2">Current Bid : {{ "IDR " . number_format($lastbid->amount) }} | {{ $lastbid->user->mask_name }}</div>
-                    <div class="fw-bold mb-2">Total Participant : {{ $leaderboard->count_participant }}</div>
-                    <div class="mb-2">
-                        <button class="btn btn-sm btn-primary">View Leaderboard</button>
-                    </div>
-                    <div id="clock"></div>
-                @else
-                    <div id="clock"></div>
-                    <div class="form-label fw-bold">
+                <div id="leaderboard">
+                    @if ($lastbid)
+                        <div class="fw-bold mb-2">Current Bid: {{ "IDR " . number_format($lastbid->amount) }} | {{ $lastbid->user->mask_name }}</div>
+                        <div class="fw-bold mb-2">Total Participant: {{ $leaderboard->count_participant }}</div>
+                        <div class="mb-2">
+                            <button class="btn btn-sm btn-primary">View Leaderboard</button>
+                        </div>
+                    @endif
+                </div>
+                <div id="clock"></div>
+                @if (!$lastbid)
+                    <div class="form-label fw-bold" id="no-bidding">
                         <div class="bg-info mt-3 p-1">
                             <div class="text-center text-white my-2">No available bidding for this product yet</div>
                         </div>
