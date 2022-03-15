@@ -5,6 +5,7 @@ namespace App\Domains\Product;
 use App\Domains\Core\Repository;
 use App\Helpers\Const\PageName;
 use App\Models\Product\Product;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -61,6 +62,10 @@ class ProductRepository extends Repository
             $query = $query->whereHas('productBidHistories', function ($q) {
                 $q->where('user_id', auth()->user()->id);
             });
+        }
+
+        if ($source == PageName::HOME) {
+            $query = $query->where('end_time', '>', Carbon::now());
         }
 
         $query = $query->orderBy('start_time')->orderBy('end_time');

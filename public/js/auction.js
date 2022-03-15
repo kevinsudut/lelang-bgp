@@ -55,7 +55,7 @@
     .on('finish.countdown', function(event) {
         $(this).html(`
             <div class="bg-success mt-3 p-1">
-                <div class="text-center text-white my-2">This bid has bid finished!</div>
+                <div class="text-center text-white my-2">This bid has been finished!</div>
             </div>
         `)
         .parent().addClass('disabled')
