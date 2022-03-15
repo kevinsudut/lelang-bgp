@@ -88,6 +88,36 @@
         })
     })
 
+    $('#leaderboardList').on('show.bs.modal', function (e) {
+        let el = $(this).find('#leaderboard-body').find('tbody')
+        
+        axios.post(`${BASE_URL}/product/bid/leaderboard/list`, {
+            id: PRODUCT_ID,
+        })
+        .then(function(response) {
+            if (response.data) {
+                el.empty()
+                $.each(response.data, function(key, value) {
+                    console.log(el)
+                    el.append(`
+                        <tr>
+                            <td>${value.rank}</td>
+                            <td>${value.amount}</td>
+                            <td>${value.user}</td>
+                        </tr>
+                    `)
+                })
+            }
+        })
+        .catch(function(error) {
+            if (error.response) {
+                $.message('bg-danger', error.response.data.message)
+            } else {
+                $.message('bg-danger', error.message)
+            }
+        })
+    })
+
     setInterval(function() {
         axios.post(`${BASE_URL}/product/bid/leaderboard`, {
             id: PRODUCT_ID,
@@ -99,10 +129,11 @@
                     <div class="fw-bold mb-2">Current Bid: ${response.data.amount} | ${response.data.user}</div>
                     <div class="fw-bold mb-2">Total Participant: ${response.data.count_participant}</div>
                     <div class="mb-2">
-                        <button class="btn btn-sm btn-primary" id="btn-leaderboard">View Leaderboard</button>
+                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#leaderboardList">View Leaderboard</button>
                     </div>
                 `)
             }
+            // <button class="btn btn-sm btn-primary" id="btn-leaderboard"></button>
         })
         .catch(function(error) {
             if (error.response) {
@@ -112,4 +143,6 @@
             }
         })
     }, 1000)
+
+
 })()

@@ -22,6 +22,7 @@ class ProductRoute implements RouteInterface
                 Route::post('bidding', [ProductBidHistoryController::class, 'bidding']);
                 Route::group(['prefix' => 'leaderboard'], function() {
                     Route::post('/', [ProductBidHistoryController::class, 'leaderboard']);
+                    Route::post('list', [ProductBidHistoryController::class, 'leaderboardList']);
                 });
             });
         });

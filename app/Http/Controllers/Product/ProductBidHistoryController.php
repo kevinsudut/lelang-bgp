@@ -146,4 +146,21 @@ class ProductBidHistoryController extends Controller
     {
         return response()->json($this->getCurrentLeaderboard($request->get('id')));
     }
+
+    public function leaderboardList(BiddingLeaderboardRequest $request)
+    {
+        $data = [];
+        $rank = 1;
+        $lists = $this->productBidHistoryRepository->leaderboardList($request->get('id'));
+
+        foreach ($lists as $list) {
+            $data[] = [
+                'rank' => $rank++,
+                'amount' => "IDR " . number_format($list->amount),
+                'user' => $list->user->mask_name,
+            ];
+        }
+
+        return response()->json($data);
+    }
 }

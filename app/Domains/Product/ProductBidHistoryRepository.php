@@ -64,4 +64,9 @@ class ProductBidHistoryRepository extends Repository
     {
         return $this->model->where('product_id', $product)->selectRaw('COUNT(1) as count_participant, IFNULL(MAX(amount), 0) max_amount')->first();
     }
+
+    public function leaderboardList($product)
+    {
+        return $this->model->where('product_id', $product)->orderBy('amount', 'desc')->get()->take(5);
+    }
 }
