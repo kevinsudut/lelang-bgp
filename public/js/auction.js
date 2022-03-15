@@ -57,7 +57,7 @@ $('#clock').countdown($('input[name=endtime]').val())
   $(this).html(event.strftime(format));
 })
 .on('finish.countdown', function(event) {
-  $(this).html('This offer has expired!')
+  $(this).html('This bid has finished!')
     .parent().addClass('disabled');
 
 });
