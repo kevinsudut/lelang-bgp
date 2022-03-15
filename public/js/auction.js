@@ -27,38 +27,38 @@
             amount.val('')
         })
     })
+
+    $('#btn-read-more').on('click', function() {
+        $('#dots').toggle()
+        $('#more').toggle()
+
+        if ($('#dots').css('display') == 'none') {
+            $(this).html('Read less')
+        } else {
+            $(this).html('Read more')
+        }
+    })
+
+    $('#clock').countdown(END_TIME).on('update.countdown', function(event) {
+        var format = '%H:%M:%S'
+        if(event.offset.totalDays > 0) {
+            format = ' %-d day%!d ' + format
+        }
+
+        if(event.offset.weeks > 0) {
+            format = ' %-w week%!w ' + format
+        }
+
+        format = 'Time left: ' + format
+        $(this).html(event.strftime(format))
+    })
+    .on('finish.countdown', function(event) {
+        $(this).html(`
+            <div class="bg-success mt-3 p-1">
+                <div class="text-center text-white my-2">This bid has bid finished!</div>
+            </div>
+        `)
+        .parent().addClass('disabled')
+    })
+
 })()
-
-var myFunc = function(){
-    var dots = document.getElementById("dots");
-    var moreText = document.getElementById("more");
-    var btnText = document.getElementById("myBtn");
-
-    if (dots.style.display === "none") {
-        dots.style.display = "inline";
-        btnText.innerHTML = "Read more";
-        moreText.style.display = "none";
-    } else {
-        dots.style.display = "none";
-        btnText.innerHTML = "Read less";
-        moreText.style.display = "inline";
-    }
-}
-
-$('#clock').countdown($('input[name=endtime]').val())
-.on('update.countdown', function(event) {
-  var format = '%H:%M:%S';
-  if(event.offset.totalDays > 0) {
-    format = ' %-d day%!d ' + format;
-  }
-  if(event.offset.weeks > 0) {
-    format = ' %-w week%!w ' + format;
-  }
-  format = 'Time left: ' + format;
-  $(this).html(event.strftime(format));
-})
-.on('finish.countdown', function(event) {
-  $(this).html('This bid has finished!')
-    .parent().addClass('disabled');
-
-});

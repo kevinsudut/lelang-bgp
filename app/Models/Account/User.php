@@ -48,7 +48,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function maskName()
+    public function getMaskNameAttribute()
     {
         $mask = '';
 
@@ -56,6 +56,11 @@ class User extends Authenticatable
         $nameArr = explode(' ', $this->name);
 
         foreach ($nameArr as $arr) {
+            if (strlen($arr) == 1) {
+                $maskArr[] = $arr;
+                continue;
+            }
+
             if (strlen($arr) <= 3) {
                 $maskArr[] = Str::of($arr)->mask('*', 0);
                 continue;

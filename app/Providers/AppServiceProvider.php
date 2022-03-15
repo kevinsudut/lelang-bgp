@@ -38,5 +38,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('read-notification', function(User $user, Notification $notification) {
             return $user->id === $notification->user_id;
         });
+
+        Gate::define('bidding', function(User $user, Product $product) {
+            return $user->id !== $product->user_id;
+        });
     }
 }

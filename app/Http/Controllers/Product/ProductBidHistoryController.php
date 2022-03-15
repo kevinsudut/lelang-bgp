@@ -13,6 +13,7 @@ use App\Http\Requests\Bidding\BiddingLeaderboardRequest;
 use App\Http\Requests\Bidding\BiddingRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProductBidHistoryController extends Controller
 {
@@ -55,6 +56,11 @@ class ProductBidHistoryController extends Controller
 
         $product = $this->productRepository->getById($productId);
         $now = Carbon::now();
+
+        if (Gate::denies('bidding', $product)) {
+            $response['message'] = "You can't bidding your product";
+            return response()->json($response);
+        }
 
         if (Carbon::parse($product->start_time)->isAfter($now)) {
             $response['message'] = "Auction has not started";

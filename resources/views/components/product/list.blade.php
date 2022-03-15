@@ -36,11 +36,10 @@
                         @php
                             $text = "In Progress";
                             $class = "bg-danger";
-                            $now = \Carbon\Carbon::now();
-                            if (\Carbon\Carbon::parse($product->start_time)->isAfter($now)) {
+                            if ($product->isNotStarted()) {
                                 $text = "Not Started";
                                 $class = "bg-info";
-                            } else if (\Carbon\Carbon::parse($product->end_time)->isBefore($now)) {
+                            } else if ($product->isAlreadyEnded()) {
                                 $text = "Done";
                                 $class = "bg-success";
                             }

@@ -40,12 +40,13 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->getById($id);
         $lastbid = $this->productBidHistoryRepository->getLargestBidding($product->id);
-        $user = auth()->user()->id;
+        $leaderboard = $this->productBidHistoryRepository->leaderboard($product->id);
+
         if ($product == null) {
             return redirect('/');
         }
 
-        return view('product.product-page.index', compact('product', 'lastbid', 'user'));
+        return view('product.product-page.index', compact('product', 'lastbid', 'leaderboard'));
     }
 
     public function store(CreateProductRequest $request)
