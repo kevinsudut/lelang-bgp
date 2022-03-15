@@ -17,7 +17,7 @@
                         <span id="dots">...</span>
                         <span id="more" style="display:  none;">{{ substr($product->description, 300) }}</span>
                     @endif
-                <button class="btn btn-link btn-small" onclick="myFunc()" id="myBtn">Read more</button>
+                <button class="btn-link" onclick="myFunc()" id="myBtn">Read more</button>
                 @if ($lastbid)
                     <div class="w-25 form-label fw-bold"> Current Bid : {{$lastbid->amount}}</div>
                 @else

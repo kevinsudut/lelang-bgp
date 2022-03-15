@@ -49,11 +49,12 @@ $('#clock').countdown($('input[name=endtime]').val())
 .on('update.countdown', function(event) {
   var format = '%H:%M:%S';
   if(event.offset.totalDays > 0) {
-    format = 'Time left: %-d day%!d ' + format;
+    format = ' %-d day%!d ' + format;
   }
   if(event.offset.weeks > 0) {
-    format = 'Time left: %-w week%!w ' + format;
+    format = ' %-w week%!w ' + format;
   }
+  format = 'Time left: ' + format;
   $(this).html(event.strftime(format));
 })
 .on('finish.countdown', function(event) {
