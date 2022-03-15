@@ -10,7 +10,7 @@
 
         <div class="input-control">
             <input name="email" placeholder="E-Mail" value="{{ old('email') }}" tabindex="1" required="" autofocus="">
-            <i class="fa fa-user"></i>
+            <i class="fa fa-envelope"></i>
         </div>
 
         <div class="input-control">
