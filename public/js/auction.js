@@ -90,7 +90,7 @@
 
     $('#leaderboardList').on('show.bs.modal', function (e) {
         let el = $(this).find('#leaderboard-body').find('tbody')
-        
+
         axios.post(`${BASE_URL}/product/bid/leaderboard/list`, {
             id: PRODUCT_ID,
         })
@@ -124,14 +124,16 @@
         })
         .then(function(response) {
             if (response.data) {
-                $('#no-bidding').remove()
-                $('#leaderboard').html(`
-                    <div class="fw-bold mb-2">Current Bid: ${response.data.amount} | ${response.data.user}</div>
-                    <div class="fw-bold mb-2">Total Participant: ${response.data.count_participant}</div>
-                    <div class="mb-2">
-                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#leaderboardList">View Leaderboard</button>
-                    </div>
-                `)
+                if (response.data.amount != undefined && response.data.user != undefined && response.data.count_participant != undefined) {
+                    $('#no-bidding').remove()
+                    $('#leaderboard').html(`
+                        <div class="fw-bold mb-2">Current Bid: ${response.data.amount} | ${response.data.user}</div>
+                        <div class="fw-bold mb-2">Total Participant: ${response.data.count_participant}</div>
+                        <div class="mb-2">
+                            <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#leaderboardList">View Leaderboard</button>
+                        </div>
+                    `)
+                }
             }
             // <button class="btn btn-sm btn-primary" id="btn-leaderboard"></button>
         })

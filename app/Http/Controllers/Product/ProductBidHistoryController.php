@@ -135,6 +135,10 @@ class ProductBidHistoryController extends Controller
         $largestbid = $this->productBidHistoryRepository->getLargestBidding($productId);
         $leaderboard = $this->productBidHistoryRepository->leaderboard($productId);
 
+        if (!$largestbid || !$leaderboard) {
+            return [];
+        }
+
         return [
             'count_participant' => $leaderboard->count_participant,
             'amount' => "IDR " . number_format($leaderboard->max_amount),
