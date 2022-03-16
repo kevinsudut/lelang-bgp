@@ -95,9 +95,6 @@
                                 </div>
                             </div>
                         </form>
-
-                        <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
-                        <script src="{{ asset('js/auction.js') }}"></script>
                     @elseif ($product->isNotStarted())
                         <h5>This auction will be started on {{ $CarbonFormater->toGMT($product->start_time) }}</h5>
                     @endif
@@ -107,6 +104,11 @@
                         <div class="text-center text-white my-2">This is your product, you can't bid it</div>
                     </div>
                 @endcannot
+
+                @if (!$product->isNotStarted())
+                    <script src="{{ asset('js/jquery.countdown.min.js') }}"></script>
+                    <script src="{{ asset('js/auction.js') }}"></script>
+                @endif
             </div>
         </div>
     </div>
