@@ -37,17 +37,6 @@
         })
     })
 
-    $('#btn-read-more').on('click', function() {
-        $('#dots').toggle()
-        $('#more').toggle()
-
-        if ($('#dots').css('display') == 'none') {
-            $(this).html('Read less')
-        } else {
-            $(this).html('Read more')
-        }
-    })
-
     $('#clock').countdown(END_TIME).on('update.countdown', function(event) {
         var format = '%H:%M:%S'
         if(event.offset.totalDays > 0) {
@@ -80,6 +69,8 @@
                 const audio = new Audio(`${BASE_URL}/sounds/alarm.mp3`)
                 audio.volume = 1
                 audio.play()
+
+                $('#form-bidding').remove()
 
                 notification.addEventListener('click', function () {
                     notification.close()

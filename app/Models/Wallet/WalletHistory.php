@@ -13,6 +13,7 @@ class WalletHistory extends Model
     public const TOP_UP = 1;
     public const DEDUCT = 2;
     public const REFUND = 3;
+    public const SOLD_ITEM = 4;
 
     public function wallet()
     {
@@ -23,7 +24,7 @@ class WalletHistory extends Model
     {
         $amount = 0;
 
-        if ($this->type == WalletHistory::TOP_UP || $this->type == WalletHistory::REFUND) {
+        if ($this->type == WalletHistory::TOP_UP || $this->type == WalletHistory::REFUND || $this->type == WalletHistory::SOLD_ITEM) {
             $amount = 'IDR ' . number_format($this->amount);
         }
 
@@ -50,6 +51,10 @@ class WalletHistory extends Model
             $str = "GoPay deduct";
         }
 
+        if ($this->type == WalletHistory::SOLD_ITEM) {
+            $str = "GoPay success sold product";
+        }
+
         return $str;
     }
 
@@ -57,7 +62,7 @@ class WalletHistory extends Model
     {
         $css = "";
 
-        if ($this->type == WalletHistory::TOP_UP || $this->type == WalletHistory::REFUND) {
+        if ($this->type == WalletHistory::TOP_UP || $this->type == WalletHistory::REFUND || $this->type == WalletHistory::SOLD_ITEM) {
             $css = "bg-success";
         }
 

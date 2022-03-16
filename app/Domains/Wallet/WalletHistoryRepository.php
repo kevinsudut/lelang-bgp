@@ -52,4 +52,13 @@ class WalletHistoryRepository extends Repository
             'type' => WalletHistory::REFUND,
         ]);
     }
+
+    public function soldProduct($wallet, $amount)
+    {
+        return $this->insert([
+            'wallet_id' => $wallet,
+            'amount' => $amount,
+            'type' => WalletHistory::SOLD_ITEM,
+        ]);
+    }
 }

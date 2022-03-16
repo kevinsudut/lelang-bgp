@@ -92,6 +92,10 @@ class AuctionWinnerJob implements ShouldQueue
                     ]);
                 }
 
+                $ownWallet = $walletRepository->topup($product->user_id, $history->amount);
+
+                $walletHistoryRepository->soldProduct($ownWallet->id, $history->amount);
+
                 $notificationRepository->insert([
                     'user_id' => $product->user_id,
                     'message' => "Auction for product {$product->name} already finished.",

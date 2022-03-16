@@ -114,4 +114,17 @@
         </div>
     </div>
 
+    <script>
+        $('#btn-read-more').on('click', function() {
+            $('#dots').toggle()
+            $('#more').toggle()
+
+            if ($('#dots').css('display') == 'none') {
+                $(this).html('Read less')
+            } else {
+                $(this).html('Read more')
+            }
+        })
+    </script>
+
 @endsection

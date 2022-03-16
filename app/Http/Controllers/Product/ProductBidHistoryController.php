@@ -77,7 +77,7 @@ class ProductBidHistoryController extends Controller
         $lastBidding = $this->productBidHistoryRepository->getLargestBidding($productId);
 
         if ($lastBidding != null && $amount <= $lastBidding->amount) {
-            $response['message'] = "Your bidding amount can't be the same as the current bid amount";
+            $response['message'] = "Your bidding amount can't be same or less than the current bid amount";
             return response()->json($response);
         }
 

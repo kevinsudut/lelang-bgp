@@ -6,9 +6,16 @@
 
 @section('content')
 
-    @include('components.product.list', [
-        'products' => $products,
-        'source' => $PageName::HOME,
-    ])
+    @if (count($products) == 0)
+        @component('components.message.message')
+            @slot('type', 'primary')
+            @slot('heading', 'There is no product yet')
+        @endcomponent
+    @else
+        @include('components.product.list', [
+            'products' => $products,
+            'source' => $PageName::HOME,
+        ])
+    @endif
 
 @endsection
