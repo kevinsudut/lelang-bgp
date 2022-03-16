@@ -65,6 +65,10 @@ class AuctionWinnerJob implements ShouldQueue
 
                         $loop++;
 
+                        $ownWallet = $walletRepository->topup($product->user_id, $history->amount);
+
+                        $walletHistoryRepository->soldProduct($ownWallet->id, $history->amount);
+
                         $notificationRepository->insert([
                             'user_id' => $history->user_id,
                             'message' => "Congratulation you are the winner for auction product {$product->name}.",
@@ -91,10 +95,6 @@ class AuctionWinnerJob implements ShouldQueue
                         'url' => "product/{$product->id}",
                     ]);
                 }
-
-                $ownWallet = $walletRepository->topup($product->user_id, $history->amount);
-
-                $walletHistoryRepository->soldProduct($ownWallet->id, $history->amount);
 
                 $notificationRepository->insert([
                     'user_id' => $product->user_id,
