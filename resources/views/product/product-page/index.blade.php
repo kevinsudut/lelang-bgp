@@ -55,7 +55,7 @@
                     @endif
                 </p>
                 <div id="leaderboard">
-                    @if ($lastbid)
+                    @if (!$product->isNotStarted() && $lastbid)
                         <div class="fw-bold mb-2">Current Bid: {{ "IDR " . number_format($lastbid->amount) }} | {{ $lastbid->user->mask_name }}</div>
                         <div class="fw-bold mb-2">Total Participant: {{ $leaderboard->count_participant }}</div>
                         <div class="mb-2">
@@ -95,10 +95,11 @@
                                 </div>
                             </div>
                         </form>
-                    @elseif ($product->isNotStarted())
-                        <h5>This auction will be started on {{ $CarbonFormater->toGMT($product->start_time) }}</h5>
                     @endif
                 @endcan
+                @if ($product->isNotStarted())
+                    <h5>This auction will be started on {{ $CarbonFormater->toGMT($product->start_time) }}</h5>
+                @endif
                 @cannot('bidding', $product)
                     <div class="bg-danger mt-3 p-1">
                         <div class="text-center text-white my-2">This is your product, you can't bid it</div>
